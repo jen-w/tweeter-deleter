@@ -6,7 +6,7 @@ This is a script I wrote to review and delete tweets sourced from my tweet archi
 ### First time
 1. Create a Twitter dev account, create an app with read/write permissions, and get credentials for your own account. Add the following env vars: `TWITTER_ACCESS_TOKEN`, `TWITTER_ACCESS_TOKEN_SECRET`, `TWITTER_CONSUMER_KEY`, `TWITTER_CONSUMER_SECRET` to your environment. If you can't be bothered to do this, that's fine. You can just open the link and delete manually.
 2. Execute `npm run start ~/path/to/twitter-2022-blah/data/tweet.js`
-3. A tweet and some details of it will be printed and the tool will prompt you to either: `o to open, d to delete, x to exit`.  
+3. A tweet and some details of it will be printed and the tool will prompt you to either: `o to open, d to delete, x to exit`. Just hit enter if you want to keep.  
 o = open link to tweet in browser  
 d = delete it  
 x = exit script

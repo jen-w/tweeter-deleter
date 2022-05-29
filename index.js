@@ -8,7 +8,7 @@ const data = fs.readFileSync(process.argv[2], 'utf8');
 const jsonString = data.replace(/window.YTD.tweet.part0 = /g, '');
 const tweets = JSON.parse(jsonString);
 
-console.log(`Total: ${tweets.length} tweets!`);
+console.log(`Total in tweet.js: ${tweets.length} tweets!`);
 
 // second arg: pagination token / last id looked at
 const pageToken = process.argv[3];
@@ -30,6 +30,11 @@ const main = async () => {
         accessToken: process.env.TWITTER_ACCESS_TOKEN,
         accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
     });
+
+    const resp = await client.v1.verifyCredentials();
+    const username = resp.screen_name;
+    console.log(`Just gonna assume this is u: @${username}`);
+    console.log(`Actual # tweets: ${resp.statuses_count}\n`);
     
     while (i < tweets.length) {
         const target = tweets[i];
@@ -38,7 +43,7 @@ const main = async () => {
             favorite_count: target.tweet.favorite_count,
             created_at: target.tweet.created_at,
             full_text: target.tweet.full_text,
-            link: "https://twitter.com/jenparmesan/status/" + target.tweet.id_str
+            link: `https://twitter.com/${username}/status/${target.tweet.id_str}`
         };
         console.log(relevant);
     
