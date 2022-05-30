@@ -28,8 +28,16 @@ const readArchive = (path) => {
         while (target.tweet.id_str !== pageToken) {
             i++;
             target = tweets[i];
-            console.log(target);
         }
+    }
+}
+
+const deleteTweet = async (id) => {
+    try {
+        const deletedTweet = await client.v1.deleteTweet(id);
+        console.log("Deleted tweet", deletedTweet.id_str, ":", deletedTweet.full_text);
+    } catch (e) {
+        console.log(e);
     }
 }
 
@@ -45,8 +53,7 @@ const processTweet = async (id, link) => {
         process.exit();
     } else {
         console.log("OK deleting.");
-        const deletedTweet = await client.v1.deleteTweet(id);
-        console.log("Deleted tweet", deletedTweet.id_str, ":", deletedTweet.full_text);
+        await deleteTweet(id);
     }
 }
 
